@@ -9,7 +9,6 @@ DEPS_DIR=$3
 INDEX=$4
 
 export JRE_URL=https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u252-b09/OpenJDK8U-jdk_x64_linux_hotspot_8u252b09.tar.gz
-export WARATEK_ZIP="waratek-secure-${WARATEK_VERSION}.zip"
 
 echo "[INFO] Installing Java"
 wget --no-check-certificate -q -c \
@@ -33,7 +32,7 @@ then
     exit 1
 else
     echo "[INFO] Download & Install Waratek Secure"
-    wget "$WARATEK_DIST_URL/$WARATEK_ZIP" -O ${BIN_DIR}/waratek-secure.zip --no-check-certificate -q
+    wget "${WARATEK_DIST_URL}" -O ${BIN_DIR}/waratek-secure.zip --no-check-certificate -q
     unzip -q ${BIN_DIR}/waratek-secure.zip -d ${BUILD_DIR}
-    mv ${BUILD_DIR}/waratek-secure-${WARATEK_VERSION} ${BUILD_DIR}/waratek-secure
+    ln -s ${BUILD_DIR}/waratek-secure-${WARATEK_VERSION} ${BUILD_DIR}/waratek-secure
 fi
