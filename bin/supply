@@ -8,7 +8,8 @@ CACHE_DIR=$2
 DEPS_DIR=$3
 INDEX=$4
 
-source ${BIN_DIR}/../vars.sh
+export JRE_URL=https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u252-b09/OpenJDK8U-jdk_x64_linux_hotspot_8u252b09.tar.gz
+export WARATEK_ZIP="waratek-secure-${WARATEK_VERSION}.zip"
 
 echo "[INFO] Installing Java"
 wget --no-check-certificate -q -c \
@@ -26,8 +27,13 @@ if [ -z ${WARATEK_VERSION+x} ];
 then
     echo "[ERROR] WARATEK_VERSION is not set. Please add it to the 'env' section of your manifest.yml file (e.g. WARATEK_VERSION: \"19.0.0\")."
     exit 1
+elif [ -z ${WARATEK_DIST_URL+x} ];
+then
+    echo "[ERROR] WARATEK_DIST_URL is not set. Please add it to the 'env' section of your manifest.yml file."
+    exit 1
+else
+    echo "[INFO] Download & Install Waratek Secure"
+    wget "$WARATEK_DIST_URL/$WARATEK_ZIP" -O ${BIN_DIR}/waratek-secure.zip --no-check-certificate -q
+    unzip -q ${BIN_DIR}/waratek-secure.zip -d ${BUILD_DIR}
+    mv ${BUILD_DIR}/waratek-secure-${WARATEK_VERSION} ${BUILD_DIR}/waratek-secure
 fi
-
-wget "$WARATEK_DIST_URL/$WARATEK_ZIP" -O ${BIN_DIR}/waratek-secure.zip --no-check-certificate -q
-unzip -q ${BIN_DIR}/waratek-secure.zip -d ${BUILD_DIR}
-mv ${BUILD_DIR}/waratek-secure-${WARATEK_VERSION} ${BUILD_DIR}/waratek-secure
