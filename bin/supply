@@ -9,7 +9,7 @@ DEPS_DIR=$3
 INDEX=$4
 
 #export JRE_URL=https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u252-b09/OpenJDK8U-jdk_x64_linux_hotspot_8u252b09.tar.gz
-exort JRE_URL=https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u252-b09/OpenJDK8U-jre_x64_linux_hotspot_8u252b09.tar.gz
+export JRE_URL=https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u252-b09/OpenJDK8U-jre_x64_linux_hotspot_8u252b09.tar.gz
 
 echo "[INFO] Processing Java"
 if [ -z ${USE_JAVA+x} ] || [ ${USE_JAVA} = 'true' ];
