@@ -1,0 +1,11 @@
+#!/bin/sh
+
+BUILD_DIR=$1
+
+# This pack is valid for apps with a waratek.enable file
+if [[ -f ${BUILD_DIR}/waratek.enable ]]; then
+  echo "Waratek Secure"
+  exit 0
+else
+  exit 1
+fi

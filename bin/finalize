@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+# Absolute path
+BIN_DIR=$(cd $(dirname $0) && pwd)
+
+BUILD_DIR=$1
+CACHE_DIR=$2
+DEPS_DIR=$3
+INDEX=$4
+
+WARATEK_CONF_DIR=${BUILD_DIR}/waratek-secure/conf_1
+
+process_config_files()
+{
+    local CONFIG_FILE=$1
+    if [[ -f ${BUILD_DIR}/${CONFIG_FILE} ]]; then
+        echo "[INFO] Using user supplied ${CONFIG_FILE}"
+        rm -f ${WARATEK_CONF_DIR}/${CONFIG_FILE}
+        cd ${WARATEK_CONF_DIR}
+        ln -s ../../${CONFIG_FILE} ${CONFIG_FILE}
+    else
+        echo "[INFO] Using default supplied ${CONFIG_FILE}"
+    fi
+}
+
+# Use user defined config, if supplied
+process_config waratek.properties
+process_config rules.armr
