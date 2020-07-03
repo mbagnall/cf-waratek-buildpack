@@ -31,3 +31,4 @@ process_config_files rules.armr
 echo "[INFO] Setting up 'environment' script"
 cp ${BIN_DIR}/../setWaratekEnv.sh ${BUILD_DIR}/setWaratekEnv.sh
 chmod +x ${BUILD_DIR}/setWaratekEnv.sh
+/home/vcap/app/setWaratekEnv.sh

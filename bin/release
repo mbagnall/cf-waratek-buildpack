@@ -1,9 +1,2 @@
-#!/bin/sh
-
-BUILD_DIR=$1
-
-cat <<EOF
----
-default_process_types:
-  web: /home/vcap/app/setWaratekEnv.sh
-EOF
+#!/usr/bin/env bash
+echo "--- {}"
