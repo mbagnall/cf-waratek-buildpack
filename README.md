@@ -2,7 +2,9 @@
 
 ## Description
 The `waratek-buildpack` is a [Cloud Foundry](https://www.cloudfoundry.org/) buildpack for running [Waratek](https://www.waratek.com/).
-It installs Java 8 (OpenJDK) and Waratek Secure and if supplied, uses the `waratek.properties` & `rules.armr` files for configuration.
+It installs Waratek Secure and if supplied, uses the `waratek.properties` & `rules.armr` files for configuration.
+
+By default it will also install Java 8 (OpenJDK) - this behaviour may be switched off as described below.
 
 ## Supported platforms
 This buildpack is tested with Cloud Foundry 6.51.0+2acd15650.2020-04-07.
@@ -40,6 +42,20 @@ the default copy supplied by Waratek.
 ### Configuration
 
 The buildpack automatically configures the `JAVA_OPTS` required for running Waratek Secure with the application to be protected. Everything else can be configured in your `waratek.properties` file. Please refer to the Waratek Secure User Guide for details on setting configuration values. A default `waratek.properties` file is shipped with the product.
+
+### Disable Java download
+
+This buildpack will download and install Java 8 by default. If you wish to disable this behaviour set the following in your `manifest.yml` or on the command line:
+
+    ```yaml
+    env:
+      USE_JAVA: 'false'
+    ```
+
+    ```bash
+    cf set-env <APP_NAME> USE_JAVA 'false'
+    ``
+**Important**: Java *is* required. This option is provided to facilitate a deployment where Java is sourced elsewhere e.g. via the Java BuildPack.
 
 ## Acknowledgements
 

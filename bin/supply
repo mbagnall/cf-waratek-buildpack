@@ -10,18 +10,26 @@ INDEX=$4
 
 export JRE_URL=https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u252-b09/OpenJDK8U-jdk_x64_linux_hotspot_8u252b09.tar.gz
 
-echo "[INFO] Installing Java"
-wget --no-check-certificate -q -c \
-        --header "Cookie: oraclelicense=accept-securebackup-cookie" \
-        ${JRE_URL} -O ${BIN_DIR}/jre.zip
+echo "[INFO] Processing Java"
+if [ -z ${USE_JAVA+x} ] || [ ${USE_JAVA} = 'true' ];
+then
+    # Default behaviour is to download & install Java
+    echo "USE_JAVA is either not set or set to 'true' so downloading & installing Java"
+    wget --no-check-certificate -q -c \
+         --header "Cookie: oraclelicense=accept-securebackup-cookie" \
+         ${JRE_URL} -O ${BIN_DIR}/jre.zip
 
-mkdir ${BUILD_DIR}/.java
+    mkdir ${BUILD_DIR}/.java
 
-# Unpack jre content directly to .java in BUILD_DIR
-# -C is the directory, strip-components removes the top-level folder (jre_1.8.....)
-tar zxf ${BIN_DIR}/jre.zip -C ${BUILD_DIR}/.java --strip-components 1
+    # Unpack jre content directly to .java in BUILD_DIR
+    # -C is the directory, strip-components removes the top-level folder (jre_1.8.....)
+    tar zxf ${BIN_DIR}/jre.zip -C ${BUILD_DIR}/.java --strip-components 1
+else
+    # Do not install Java if explicitly told not to
+    echo "USE_JAVA is (probably) set to false, as per docs, so not downloading JAVA"
+fi
 
-echo "[INFO] Installing Waratek Secure"
+echo "[INFO] Processing Waratek Secure"
 if [ -z ${WARATEK_VERSION+x} ];
 then
     echo "[ERROR] WARATEK_VERSION is not set. Please add it to the 'env' section of your manifest.yml file (e.g. WARATEK_VERSION: \"19.0.0\")."
