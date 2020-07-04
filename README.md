@@ -25,8 +25,8 @@ To use this buildpack, specify the URI of this repository when pushing a waratek
 
     ```bash
     cf set-env <APP_NAME> WARATEK_VERSION '19.0.0'
-    cd set-env <APP_NAME> WARATEK_DIST_URL 'https://waratek-downloads/waratek-secure/waratek-secure-19.0.0.zip'
-    cd set-env <APP_NAME> APP_LAUNCH_CMD 'java -cp /home/vcap/app/. org.springframework.boot.loader.JarLauncher'
+    cf set-env <APP_NAME> WARATEK_DIST_URL 'https://waratek-downloads/waratek-secure/waratek-secure-19.0.0.zip'
+    cf set-env <APP_NAME> APP_LAUNCH_CMD 'java -cp /home/vcap/app/. org.springframework.boot.loader.JarLauncher'
     ```
 **Important**: `APP_LAUNCH_CMD` is the usual command or start script used to start the Application that Waratek will protect.
 
