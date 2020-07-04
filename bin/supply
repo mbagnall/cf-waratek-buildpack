@@ -39,9 +39,14 @@ elif [ -z ${WARATEK_DIST_URL+x} ];
 then
     echo "[ERROR] WARATEK_DIST_URL is not set. Please add it to the 'env' section of your manifest.yml file."
     exit 1
+elif [ -z ${APP_LAUNCH_CMD+x} ];
+then
+    echo "[ERROR] APP_LAUNCH_CMD is not set. Please add it to the 'env' section of your manifest.yml file."
+    exit 1
 else
     echo "[INFO] Download & Install Waratek Secure"
     wget "${WARATEK_DIST_URL}" -O ${BIN_DIR}/waratek-secure.zip --no-check-certificate -q
     unzip -q ${BIN_DIR}/waratek-secure.zip -d ${BUILD_DIR}
+    cd ${BUILD_DIR}
     ln -s ${BUILD_DIR}/waratek-secure-${WARATEK_VERSION} ${BUILD_DIR}/waratek-secure
 fi

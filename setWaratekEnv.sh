@@ -14,4 +14,4 @@ export JAVA_OPTS="${JAVA_OPTS} -javaagent:${WARATEK_ROOT}/agent/waratek.jar -Dco
 # Run application with Waratek
 echo "[INFO] Start Application with Waratek Secure"
 echo "[] Application start command is: ${APP_LAUNCH_CMD}"
-java -cp /home/vcap/app/. ${APP_LAUNCH_CMD}
+${APP_LAUNCH_CMD}

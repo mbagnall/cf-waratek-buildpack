@@ -14,18 +14,21 @@ To use this buildpack, specify the URI of this repository when pushing a waratek
 
 1. In your application directory, execute ```touch waratek.enable```.  This file must exist or the build pack will skip processing.
 
-2. **Important**: You need to specify `WARATEK_VERSION` and `WARATEK_DIST_URL` as environment variables in your `manifest.yml` or on the command line, e.g.:
+2. **Important**: You need to specify `WARATEK_VERSION`, `WARATEK_DIST_URL` and `APP_LAUNCH_CMD` as environment variables in your `manifest.yml` or on the command line, e.g.:
 
     ```yaml
     env:
       WARATEK_VERSION: '19.0.0'
       WARATEK_DIST_URL: 'https://waratek-downloads/waratek-secure/waratek-secure-19.0.0.zip'
+      APP_LAUNCH_CMD: 'java -cp /home/vcap/app/. org.springframework.boot.loader.JarLauncher'
     ```
 
     ```bash
     cf set-env <APP_NAME> WARATEK_VERSION '19.0.0'
     cd set-env <APP_NAME> WARATEK_DIST_URL 'https://waratek-downloads/waratek-secure/waratek-secure-19.0.0.zip'
+    cd set-env <APP_NAME> APP_LAUNCH_CMD 'java -cp /home/vcap/app/. org.springframework.boot.loader.JarLauncher'
     ```
+**Important**: `APP_LAUNCH_CMD` is the usual command or start script used to start the Application that Waratek will protect.
 
 3. **Optional**: Place your user defined `waratek.properties` file in the application directory. The build pack will use this in preference to
 the default copy supplied by Waratek.
