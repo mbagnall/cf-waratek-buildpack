@@ -13,6 +13,7 @@ export JAVA_OPTS="${JAVA_OPTS} -javaagent:${WARATEK_ROOT}/agent/waratek.jar -Dco
 
 # Run application with Waratek
 echo "[INFO] Start Application with Waratek Secure"
-echo "[] Application start command is: ${APP_LAUNCH_CMD}"
+echo "[INFO] Application start command is: ${APP_LAUNCH_CMD}"
+echo "[INFO] JAVA_OPTS to be used are: ${JAVA_OPTS}"
 #${APP_LAUNCH_CMD}
 export JAVA_OPTS="${JAVA_OPTS} -javaagent:${WARATEK_ROOT}/agent/waratek.jar -Dcom.waratek.WaratekProperties=${WARATEK_ROOT}/conf_1/waratek.properties" && ${APP_LAUNCH_CMD}
