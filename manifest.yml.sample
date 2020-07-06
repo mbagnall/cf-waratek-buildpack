@@ -1,0 +1,14 @@
+---
+applications:
+- name: spring-music
+  memory: 1.5G
+  random-route: true
+  path: build/libs/spring-music-1.0.jar
+  env:
+    WARATEK_VERSION: '16.3.1'
+    WARATEK_DIST_URL: 'https://www.waratek.com/download/waratek-secure.zip'
+    USE_JAVA: 'true'
+    APP_LAUNCH_CMD: 'java -javaagent:/home/vcap/app/waratek-secure/agent/waratek.jar -Dcom.waratek.WaratekProperties=/home/vcap/app/waratek-secure/conf_1/waratek.properties -cp /home/vcap/app/. org.springframework.boot.loader.JarLauncher'
+    #APP_LAUNCH_CMD: 'java -cp /home/vcap/app/ -jar spring-music-1.0.jar'
+    JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{enabled: false}'
+#    JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 11.+ } }'
